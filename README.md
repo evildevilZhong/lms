@@ -6,7 +6,7 @@ library management system
 基于JAVA技术栈实现的图书后台管理系统(基于macrozheng/mal项目提供的脚手架开发)
 
 ### 项目开发测试启动
-1、运行/lms-library/src/main/java/com/chung/lms/LmsAdminApplication.java的main函数启动
+1、运行/lms-library/src/main/java/com/chung/lms/LmsAdminApplication.java的main函数启动</br>
 2、数据库为mysql5.8, 数据库表schema及测试数据脚本路径为/document/sql/lms.sql
 3、swagger页面访问路径http://localhost:8089/swagger-ui/#/
 
