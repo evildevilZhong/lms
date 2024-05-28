@@ -3,7 +3,8 @@ library management system
 
 ## 简介
 
-基于JAVA技术栈实现的图书后台管理系统(基于macrozheng/mal项目提供的脚手架开发)
+基于JAVA技术栈实现的图书后台管理系统(基于macrozheng/mal项目提供的脚手架开发)。基于SpringSecurity使用JWT对用户进行认证，
+可动态配置为角色分配资源访问权限。
 
 ### 项目开发测试启动
 1、运行/lms-library/src/main/java/com/chung/lms/LmsAdminApplication.java的main函数启动</br>
