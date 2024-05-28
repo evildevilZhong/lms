@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chung.lms.mapper.LibraryMemberMapper">
+  <resultMap id="BaseResultMap" type="com.chung.lms.model.LibraryMember">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="ums_id" jdbcType="BIGINT" property="umsId" />
+    <result column="date_of_membership" jdbcType="TIMESTAMP" property="dateOfMembership" />
+    <result column="books_of_checkout" jdbcType="VARCHAR" property="booksOfCheckout" />
+    <result column="active" jdbcType="INTEGER" property="active" />
+    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, ums_id, date_of_membership, books_of_checkout, active, barcode
+  </sql>
+  <select id="selectByExample" parameterType="com.chung.lms.model.LibraryMemberExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from library_member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from library_member
+    where id = #{id,jdbcType=BIGINT}
+      and ums_id = #{umsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from library_member
+    where id = #{id,jdbcType=BIGINT}
+      and ums_id = #{umsId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chung.lms.model.LibraryMemberExample">
+    delete from library_member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chung.lms.model.LibraryMember">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into library_member (ums_id, date_of_membership, books_of_checkout, 
+      active, barcode)
+    values (#{umsId,jdbcType=BIGINT}, #{dateOfMembership,jdbcType=TIMESTAMP}, #{booksOfCheckout,jdbcType=VARCHAR}, 
+      #{active,jdbcType=INTEGER}, #{barcode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chung.lms.model.LibraryMember">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into library_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="umsId != null">
+        ums_id,
+      </if>
+      <if test="dateOfMembership != null">
+        date_of_membership,
+      </if>
+      <if test="booksOfCheckout != null">
+        books_of_checkout,
+      </if>
+      <if test="active != null">
+        active,
+      </if>
+      <if test="barcode != null">
+        barcode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="umsId != null">
+        #{umsId,jdbcType=BIGINT},
+      </if>
+      <if test="dateOfMembership != null">
+        #{dateOfMembership,jdbcType=TIMESTAMP},
+      </if>
+      <if test="booksOfCheckout != null">
+        #{booksOfCheckout,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=INTEGER},
+      </if>
+      <if test="barcode != null">
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chung.lms.model.LibraryMemberExample" resultType="java.lang.Long">
+    select count(*) from library_member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update library_member
+    <set>
+      <if test="row.id != null">
+        id = #{row.id,jdbcType=BIGINT},
+      </if>
+      <if test="row.umsId != null">
+        ums_id = #{row.umsId,jdbcType=BIGINT},
+      </if>
+      <if test="row.dateOfMembership != null">
+        date_of_membership = #{row.dateOfMembership,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.booksOfCheckout != null">
+        books_of_checkout = #{row.booksOfCheckout,jdbcType=VARCHAR},
+      </if>
+      <if test="row.active != null">
+        active = #{row.active,jdbcType=INTEGER},
+      </if>
+      <if test="row.barcode != null">
+        barcode = #{row.barcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update library_member
+    set id = #{row.id,jdbcType=BIGINT},
+      ums_id = #{row.umsId,jdbcType=BIGINT},
+      date_of_membership = #{row.dateOfMembership,jdbcType=TIMESTAMP},
+      books_of_checkout = #{row.booksOfCheckout,jdbcType=VARCHAR},
+      active = #{row.active,jdbcType=INTEGER},
+      barcode = #{row.barcode,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chung.lms.model.LibraryMember">
+    update library_member
+    <set>
+      <if test="dateOfMembership != null">
+        date_of_membership = #{dateOfMembership,jdbcType=TIMESTAMP},
+      </if>
+      <if test="booksOfCheckout != null">
+        books_of_checkout = #{booksOfCheckout,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        active = #{active,jdbcType=INTEGER},
+      </if>
+      <if test="barcode != null">
+        barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+      and ums_id = #{umsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chung.lms.model.LibraryMember">
+    update library_member
+    set date_of_membership = #{dateOfMembership,jdbcType=TIMESTAMP},
+      books_of_checkout = #{booksOfCheckout,jdbcType=VARCHAR},
+      active = #{active,jdbcType=INTEGER},
+      barcode = #{barcode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+      and ums_id = #{umsId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  lms-library:
+    image: lms/lms-library:1.0-SNAPSHOT
+    container_name: lms-library
+    ports:
+      - 8080:8080
+    volumes:
+      - /mydata/app/lms-library/logs:/var/logs
+      - /etc/localtime:/etc/localtime
+    environment:
+      - 'TZ="Asia/Shanghai"'
+    external_links:
+      - mysql:db #可以用db这个域名访问mysql服务
