@@ -7,13 +7,13 @@ library management system
 
 ### 项目开发测试启动
 1、运行/lms-library/src/main/java/com/chung/lms/LmsAdminApplication.java的main函数启动</br>
-2、数据库为mysql5.8, 数据库表schema及测试数据脚本路径为/document/sql/lms.sql
+2、数据库为mysql5.8, 数据库表schema及测试数据脚本路径为/document/sql/lms.sql</br>
 3、swagger页面访问路径http://localhost:8089/swagger-ui/#/
 
 ### 组织结构
-lms-common -- 工具类及通用代码
-lms-mbg -- 数据库操作代码
-lms-security -- 登录鉴权相关代码
+lms-common -- 工具类及通用代码</br>
+lms-mbg -- 数据库操作代码</br>
+lms-security -- 登录鉴权相关代码</br>
 lms-library -- 图书管理系统业务逻辑代码
 
 ### 开发环境依赖
