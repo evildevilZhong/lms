@@ -53,7 +53,7 @@ public class LibraryActivityServiceImpl implements LibraryActivityService {
         }
 
         // 获取书籍藏本信息
-        LibraryBookItem bookItem = libraryBookItemService.getBookItemByBarCode(bookBarCode);
+        LibraryBookItem bookItem = libraryBookItemService.getByBarCode(bookBarCode);
         if (null == bookItem) {
             throw new CommonLmsException("该书籍还未录入系统，请联系图书管理员处理");
         }
@@ -72,7 +72,7 @@ public class LibraryActivityServiceImpl implements LibraryActivityService {
         bookItem.setBorrowMemberId(borrowerMemberInfo.getUmsId());
         bookItem.setReservationDueDate(null);
         bookItem.setReservationMemberId(null);
-        libraryBookItemService.updateByBookItemId(bookItem);
+        libraryBookItemService.updateById(bookItem);
 
         // 更新借阅会员已借阅书籍列表
         List<String> borrowsBooks = new ArrayList();
