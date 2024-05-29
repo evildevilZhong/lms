@@ -1,9 +1,13 @@
 package com.chung.lms.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotEmpty;
 
+@Data
+@EqualsAndHashCode
 public class UpdateBookParam {
 
     @NotEmpty
